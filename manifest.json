@@ -16,7 +16,7 @@
         "unlimitedStorage"
     ],
     "host_permissions": [
-        "<all_urls>"
+        "<https://securesync-backend-ww8n.onrender.com/api>"
     ],
     "background": {
         "service_worker": "src/background/service-worker.js",
