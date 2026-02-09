@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecureSync</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Locked State -->
+    <div id="locked-view" class="view">
+      <div class="lock-icon">🔒</div>
+      <h2>Vault Locked</h2>
+      <p>Enter your master password to unlock</p>
+
+      <form id="unlock-form">
+        <div class="password-input-wrapper">
+          <input type="password" id="master-password" placeholder="Master password" autocomplete="current-password"
+            required>
+          <button type="button" class="toggle-password" data-target="master-password" title="Show password">
+            👁️
+          </button>
+        </div>
+        <button type="submit" class="btn btn-primary">Unlock</button>
+      </form>
+
+      <div id="unlock-error" class="error hidden"></div>
+      <div id="master-hint-display" class="hint-text hidden"></div>
+      <button id="show-hint-btn" class="btn btn-link small">Show Hint</button>
+    </div>
+
+    <!-- Initial Setup State -->
+    <div id="setup-view" class="view hidden">
+      <div class="lock-icon">🛠️</div>
+      <h2>Set Master Password</h2>
+      <p>This password encrypts your local vault. It is NEVER stored on our servers.</p>
+
+      <form id="setup-form">
+        <div class="form-group">
+          <div class="password-input-wrapper">
+            <input type="password" id="setup-password" placeholder="Master password" minlength="8" required>
+            <button type="button" class="toggle-password" data-target="setup-password"
+              title="Show password">👁️</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="password-input-wrapper">
+            <input type="password" id="setup-password-confirm" placeholder="Confirm master password" minlength="8"
+              required>
+            <button type="button" class="toggle-password" data-target="setup-password-confirm"
+              title="Show password">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Vault</button>
+      </form>
+      <div id="setup-error" class="error hidden"></div>
+    </div>
+
+    <!-- Unlocked State -->
+    <div id="unlocked-view" class="view hidden">
+      <!-- Header -->
+      <div class="header">
+        <div class="header-title">
+          <span class="logo">🔐</span>
+          <h1>SecureSync</h1>
+        </div>
+        <div class="header-actions">
+          <button id="sync-btn" class="icon-btn" title="Sync now">
+            <span class="sync-icon">🔄</span>
+          </button>
+          <button id="lock-btn" class="icon-btn" title="Lock vault">
+            <span>🔒</span>
+          </button>
+          <button id="logout-btn" class="icon-btn" title="Logout">
+            <span>🚪</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sync Status -->
+      <div id="sync-status" class="sync-status hidden">
+        <span class="sync-text">Syncing...</span>
+      </div>
+
+      <!-- Search -->
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search passwords...">
+      </div>
+
+      <!-- Password List -->
+      <div id="password-list" class="password-list">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-icon">📭</div>
+        <p>No passwords saved yet</p>
+        <small>Passwords will appear here when you save them</small>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <button id="add-password-btn" class="btn btn-secondary">
+          + Add Password
+        </button>
+        <div class="footer-actions">
+          <button id="export-vault-btn" class="btn btn-link">
+            📥 Export
+          </button>
+          <button id="open-settings-btn" class="btn btn-link">
+            Settings
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Required State -->
+    <div id="login-view" class="view hidden">
+      <div class="logo-large">🔐</div>
+      <h2>Welcome to SecureSync</h2>
+      <p>Please sign in to access your passwords</p>
+
+      <button id="goto-login-btn" class="btn btn-primary">
+        Sign In / Sign Up
+      </button>
+    </div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+
+</html>

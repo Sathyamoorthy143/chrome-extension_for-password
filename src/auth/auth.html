@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureSync - Sign In</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="auth-card">
+            <!-- Logo and Title -->
+            <div class="header">
+                <div class="logo">🔐</div>
+                <h1>SecureSync</h1>
+                <p class="subtitle">Secure Password & Bookmark Manager</p>
+            </div>
+
+            <!-- Tab Switcher -->
+            <div class="tab-switcher">
+                <button id="login-tab" class="tab-btn active">Login</button>
+                <button id="signup-tab" class="tab-btn">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="your@email.com" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-row">
+                        <label for="login-password">Password</label>
+                        <a href="#" id="forgot-password-link" class="small-link">Forgot Password?</a>
+                    </div>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="login-password" placeholder="Enter your password"
+                            autocomplete="current-password" required>
+                        <button type="button" class="toggle-password" data-target="login-password"
+                            title="Show password">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="login-btn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loader hidden">⏳</span>
+                </button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signup-form" class="auth-form hidden">
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="your@email.com" autocomplete="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="signup-password" placeholder="Create a strong password"
+                            autocomplete="new-password" minlength="8" required>
+                        <button type="button" class="toggle-password" data-target="signup-password"
+                            title="Show password">
+                            👁️
+                        </button>
+                    </div>
+                    <div class="hint-group">
+                        <input type="text" id="signup-password-hint" placeholder="Login password hint (optional)">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-password-confirm">Confirm Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="signup-password-confirm" placeholder="Re-enter your password"
+                            autocomplete="new-password" minlength="8" required>
+                        <button type="button" class="toggle-password" data-target="signup-password-confirm"
+                            title="Show password">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group border-top">
+                    <label for="signup-master-hint">Master Password Hint</label>
+                    <p class="small-text">This will help you recover your vault locally if you forget your master
+                        password.</p>
+                    <input type="text" id="signup-master-hint" placeholder="Master password hint (optional)">
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="signup-btn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-loader hidden">⏳</span>
+                </button>
+            </form>
+
+            <!-- Message Display -->
+            <div id="message" class="message hidden"></div>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <p>🔒 Your data is encrypted end-to-end</p>
+                <p>🌐 Sync across all your devices</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="auth-ui.js"></script>
+</body>
+
+</html>

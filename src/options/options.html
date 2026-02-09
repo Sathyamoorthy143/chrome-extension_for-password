@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureSync Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>⚙️ SecureSync Settings</h1>
+            <p class="subtitle">Configure your password and bookmark sync preferences</p>
+        </header>
+
+        <main>
+            <!-- Account Section -->
+            <section class="settings-section">
+                <h2>Account</h2>
+                <div class="setting-item">
+                    <label>Email:</label>
+                    <span id="user-email" class="value">Not logged in</span>
+                </div>
+                <div class="setting-item">
+                    <label>Account Status:</label>
+                    <span id="account-status" class="value">Inactive</span>
+                </div>
+                <button id="logout-btn" class="btn btn-secondary" style="display: none;">Logout</button>
+            </section>
+
+            <!-- Sync Settings -->
+            <section class="settings-section">
+                <h2>Sync Settings</h2>
+
+                <div class="setting-item">
+                    <label for="sync-passwords">
+                        <input type="checkbox" id="sync-passwords" checked>
+                        Sync Passwords
+                    </label>
+                    <p class="description">Automatically sync your saved passwords across devices</p>
+                </div>
+
+                <div class="setting-item">
+                    <label for="sync-bookmarks">
+                        <input type="checkbox" id="sync-bookmarks" checked>
+                        Sync Bookmarks
+                    </label>
+                    <p class="description">Keep your bookmarks synchronized across browsers</p>
+                </div>
+
+                <div class="setting-item">
+                    <label for="auto-sync">
+                        <input type="checkbox" id="auto-sync" checked>
+                        Auto Sync
+                    </label>
+                    <p class="description">Automatically sync when changes are detected</p>
+                </div>
+
+                <div class="setting-item">
+                    <label for="sync-interval">Sync Interval (minutes):</label>
+                    <input type="number" id="sync-interval" min="1" max="60" value="5">
+                    <p class="description">How often to check for updates (1-60 minutes)</p>
+                </div>
+            </section>
+
+            <!-- Security Settings -->
+            <section class="settings-section">
+                <h2>Security</h2>
+
+                <div class="setting-item">
+                    <label for="master-password">
+                        <input type="checkbox" id="master-password">
+                        Require Master Password
+                    </label>
+                    <p class="description">Require a master password to unlock the extension</p>
+                </div>
+
+                <div class="setting-item">
+                    <label for="auto-lock">
+                        <input type="checkbox" id="auto-lock">
+                        Auto-lock after inactivity
+                    </label>
+                    <p class="description">Lock the extension after a period of inactivity</p>
+                </div>
+
+                <div class="setting-item">
+                    <label for="lock-timeout">Lock Timeout (minutes):</label>
+                    <input type="number" id="lock-timeout" min="1" max="60" value="15">
+                    <p class="description">Time before auto-lock (1-60 minutes)</p>
+                </div>
+            </section>
+
+            <!-- Server Settings -->
+            <section class="settings-section">
+                <h2>Server Configuration</h2>
+
+                <div class="setting-item">
+                    <label for="api-url">API Server URL:</label>
+                    <input type="text" id="api-url" value="http://localhost:3000" placeholder="http://localhost:3000">
+                    <p class="description">Backend server URL for syncing data</p>
+                </div>
+            </section>
+
+            <!-- Data Management -->
+            <section class="settings-section">
+                <h2>Data Management</h2>
+
+                <div class="setting-item">
+                    <button id="export-data-btn" class="btn btn-secondary">Export Data</button>
+                    <p class="description">Download your encrypted data as a backup</p>
+                </div>
+
+                <div class="setting-item">
+                    <button id="import-data-btn" class="btn btn-secondary">Import Data</button>
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                    <p class="description">Restore data from a backup file</p>
+                </div>
+
+                <div class="setting-item">
+                    <button id="clear-data-btn" class="btn btn-danger">Clear All Local Data</button>
+                    <p class="description">⚠️ Warning: This will delete all local passwords and bookmarks</p>
+                </div>
+            </section>
+
+            <!-- About -->
+            <section class="settings-section">
+                <h2>About</h2>
+                <div class="setting-item">
+                    <label>Version:</label>
+                    <span class="value">1.0.0</span>
+                </div>
+                <div class="setting-item">
+                    <label>Last Sync:</label>
+                    <span id="last-sync" class="value">Never</span>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <button id="save-btn" class="btn btn-primary">Save Settings</button>
+            <div id="status-message" class="status-message"></div>
+        </footer>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>
