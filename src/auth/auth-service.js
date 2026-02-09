@@ -5,7 +5,7 @@
 import { saveAuthTokens, getAuthTokens, clearAuthTokens, saveUserEmail, getUserEmail } from '../storage/local-storage.js';
 
 // Backend API URL - update this with your deployed backend
-const API_BASE_URL = 'http://localhost:3001/api';
+const API_BASE_URL = 'https://securesync-backend-ww8n.onrender.com/api';
 
 /**
  * Sign up a new user

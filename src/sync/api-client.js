@@ -5,8 +5,7 @@
 import { authenticatedFetch } from '../auth/auth-service.js';
 import { getDeviceId } from '../storage/local-storage.js';
 
-const API_BASE_URL = 'http://localhost:3001/api';
-
+const API_BASE_URL = 'https://securesync-backend-ww8n.onrender.com/api';
 /**
  * Fetch encrypted passwords from server
  * @param {string} lastSyncTimestamp - Optional timestamp for delta sync
