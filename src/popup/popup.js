@@ -13,6 +13,8 @@ let setupForm, setupPassword, setupPasswordConfirm, setupError;
 let passwordList, emptyState, searchInput;
 let syncBtn, lockBtn, addPasswordBtn, openSettingsBtn, gotoLoginBtn, exportVaultBtn, logoutBtn;
 let syncStatus;
+let addPasswordModal, addPasswordForm, closeModalBtn, cancelAddBtn;
+let manualWebsite, manualUsername, manualPassword, manualNotes, addPasswordError;
 
 let unlockAttempts = 0;
 
@@ -50,6 +52,17 @@ async function initialize() {
     logoutBtn = document.getElementById('logout-btn');
     syncStatus = document.getElementById('sync-status');
 
+    // Modal elements
+    addPasswordModal = document.getElementById('add-password-modal');
+    addPasswordForm = document.getElementById('add-password-form');
+    closeModalBtn = document.getElementById('close-modal-btn');
+    cancelAddBtn = document.getElementById('cancel-add-btn');
+    manualWebsite = document.getElementById('manual-website');
+    manualUsername = document.getElementById('manual-username');
+    manualPassword = document.getElementById('manual-password');
+    manualNotes = document.getElementById('manual-notes');
+    addPasswordError = document.getElementById('add-password-error');
+
     // Attach event listeners
     unlockForm.addEventListener('submit', handleUnlock);
     setupForm.addEventListener('submit', handleSetup);
@@ -57,11 +70,14 @@ async function initialize() {
     lockBtn.addEventListener('click', handleLock);
     syncBtn.addEventListener('click', handleSync);
     searchInput.addEventListener('input', handleSearch);
-    addPasswordBtn.addEventListener('click', openSettings);
+    addPasswordBtn.addEventListener('click', openAddPasswordModal);
     openSettingsBtn.addEventListener('click', openSettings);
     gotoLoginBtn.addEventListener('click', openSettings);
     exportVaultBtn.addEventListener('click', handleExportVault);
     logoutBtn.addEventListener('click', handleLogout);
+    addPasswordForm.addEventListener('submit', handleAddPassword);
+    closeModalBtn.addEventListener('click', closeAddPasswordModal);
+    cancelAddBtn.addEventListener('click', closeAddPasswordModal);
 
     // Initialize all password toggle buttons
     const toggleButtons = document.querySelectorAll('.toggle-password');
@@ -437,6 +453,63 @@ async function openSettings() {
         Browser.tabs.create({
             url: Browser.runtime.getURL('src/options/options.html')
         });
+    }
+}
+
+/**
+ * Open add password modal
+ */
+function openAddPasswordModal() {
+    addPasswordModal.classList.remove('hidden');
+    manualWebsite.focus();
+    // Clear previous values
+    addPasswordForm.reset();
+    addPasswordError.classList.add('hidden');
+}
+
+/**
+ * Close add password modal
+ */
+function closeAddPasswordModal() {
+    addPasswordModal.classList.add('hidden');
+    addPasswordForm.reset();
+    addPasswordError.classList.add('hidden');
+}
+
+/**
+ * Handle add password form submission
+ */
+async function handleAddPassword(e) {
+    e.preventDefault();
+
+    const website = manualWebsite.value.trim();
+    const username = manualUsername.value.trim();
+    const password = manualPassword.value;
+    const notes = manualNotes.value.trim();
+
+    if (!website || !username || !password) {
+        addPasswordError.textContent = 'Please fill in all required fields';
+        addPasswordError.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        const { addPassword } = await import('../crypto/vault.js');
+
+        await addPassword({
+            url: website,
+            username: username,
+            password: password,
+            notes: notes || ''
+        });
+
+        closeAddPasswordModal();
+        await loadPasswords();
+        showToast('✅ Password added successfully!');
+    } catch (error) {
+        console.error('Add password error:', error);
+        addPasswordError.textContent = 'Failed to add password. Please try again.';
+        addPasswordError.classList.remove('hidden');
     }
 }
 

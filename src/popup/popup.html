@@ -128,6 +128,43 @@
         Sign In / Sign Up
       </button>
     </div>
+
+    <!-- Add Password Modal -->
+    <div id="add-password-modal" class="modal hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Add Password Manually</h3>
+          <button id="close-modal-btn" class="close-btn">×</button>
+        </div>
+        <form id="add-password-form">
+          <div class="form-group">
+            <label for="manual-website">Website/App Name *</label>
+            <input type="text" id="manual-website" placeholder="e.g., google.com" required>
+          </div>
+          <div class="form-group">
+            <label for="manual-username">Username/Email *</label>
+            <input type="text" id="manual-username" placeholder="e.g., user@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="manual-password">Password *</label>
+            <div class="password-input-wrapper">
+              <input type="password" id="manual-password" placeholder="Enter password" required>
+              <button type="button" class="toggle-password" data-target="manual-password"
+                title="Show password">👁️</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="manual-notes">Notes (Optional)</label>
+            <textarea id="manual-notes" placeholder="Additional notes..." rows="3"></textarea>
+          </div>
+          <div id="add-password-error" class="error hidden"></div>
+          <div class="modal-actions">
+            <button type="button" id="cancel-add-btn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="popup.js"></script>
